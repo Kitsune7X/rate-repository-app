@@ -9,11 +9,17 @@ const styles = StyleSheet.create({
 		fontFamily: theme.fonts.main,
 		fontWeight: theme.fontWeights.normal,
 	},
+	colorSubHeading: {
+		color: theme.colors.subHeading,
+	},
 	colorTextSecondary: {
 		color: theme.colors.textSecondary,
 	},
 	colorPrimary: {
 		color: theme.colors.primary,
+	},
+	fontSizeHeading: {
+		fontSize: theme.fontSizes.heading,
 	},
 	fontSizeSubheading: {
 		fontSize: theme.fontSizes.subheading,
@@ -28,6 +34,8 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
 		styles.text,
 		color === 'textSecondary' && styles.colorTextSecondary,
 		color === 'primary' && styles.colorPrimary,
+		color === 'subheading' && styles.colorSubHeading,
+		fontSize === 'heading' && styles.fontSizeHeading,
 		fontSize === 'subheading' && styles.fontSizeSubheading,
 		fontWeight === 'bold' && styles.fontWeightBold,
 		style,
