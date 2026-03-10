@@ -1,3 +1,4 @@
+// @ts-check
 import { StyleSheet, View } from 'react-native';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';

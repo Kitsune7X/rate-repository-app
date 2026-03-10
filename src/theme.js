@@ -1,3 +1,7 @@
+// @ts-check
+
+// Using JSDoc type annotations since as const is not usable
+// https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
 const theme = {
 	colors: {
 		textPrimary: '#24292e',
@@ -14,10 +18,10 @@ const theme = {
 	fonts: {
 		main: 'System',
 	},
-	fontWeights: {
+	fontWeights: /** @type {const} */ ({
 		normal: '400',
 		bold: '700',
-	},
+	}),
 };
 
 export default theme;

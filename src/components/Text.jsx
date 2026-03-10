@@ -1,3 +1,4 @@
+// @ts-check
 import { Text as NativeText, StyleSheet } from 'react-native';
 
 import theme from '../theme';
@@ -29,7 +30,24 @@ const styles = StyleSheet.create({
 	},
 });
 
-const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
+// Define special type with JSDoc
+/**
+ * @typedef {Object} TextComponentProps
+ * @property {'textSecondary' | 'primary' | 'subheading'} [color]
+ * @property {'heading' | 'subheading'} [fontSize]
+ * @property {'bold'} [fontWeight]
+ * @property {any} [style]
+ * @property {string |  number | (string | number)[]} children
+ */
+
+// Assign the defined special type to props
+/**
+ *
+ * @param {TextComponentProps} props
+ * @returns
+ */
+
+const Text = ({ color, fontSize, fontWeight, style, children, ...props }) => {
 	const textStyle = [
 		styles.text,
 		color === 'textSecondary' && styles.colorTextSecondary,
@@ -41,7 +59,11 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
 		style,
 	];
 
-	return <NativeText style={textStyle} {...props} />;
+	return (
+		<NativeText style={textStyle} {...props}>
+			{children}
+		</NativeText>
+	);
 };
 
 export default Text;

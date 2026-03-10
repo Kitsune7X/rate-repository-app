@@ -1,3 +1,4 @@
+// @ts-check
 import Main from './src/components/Main';
 
 const App = () => {
