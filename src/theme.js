@@ -6,9 +6,10 @@ const theme = {
 	colors: {
 		textPrimary: '#24292e',
 		textSecondary: '#586069',
-		subHeading: '#e7e7e7',
+		lightWhite: '#fff',
 		primary: '#0366d6',
 		background: '#24292e',
+		lightGray: '#e1e4e8',
 	},
 	fontSizes: {
 		body: 14,

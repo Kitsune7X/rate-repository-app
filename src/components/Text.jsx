@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 		fontWeight: theme.fontWeights.normal,
 	},
 	colorSubHeading: {
-		color: theme.colors.subHeading,
+		color: theme.colors.lightWhite,
 	},
 	colorTextSecondary: {
 		color: theme.colors.textSecondary,

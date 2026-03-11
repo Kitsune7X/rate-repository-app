@@ -5,26 +5,33 @@ import theme from '../theme';
 
 const styles = StyleSheet.create({
 	container: {
-		paddingVertical: 10,
-		paddingHorizontal: 10,
+		paddingVertical: 15,
+		paddingHorizontal: 15,
+		backgroundColor: theme.colors.lightWhite,
 	},
 	avatar: {
-		height: 50,
-		width: 50,
+		height: 60,
+		width: 60,
 		borderRadius: 4,
 	},
 	header: {
 		flexDirection: 'row',
 		gap: 10,
+		marginBottom: 10,
 	},
 	summary: {
 		alignItems: 'flex-start',
+		gap: 7,
 	},
 	language: {
 		paddingHorizontal: 6,
 		paddingVertical: 5,
 		backgroundColor: theme.colors.primary,
 		borderRadius: 4,
+	},
+	statisticContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
 	},
 });
 
@@ -66,12 +73,44 @@ const RepositoryItem = ({ repository }) => {
 			</View>
 
 			{/* Repository Details */}
-			<Text>Forks: {repository.forksCount}</Text>
-			<Text>Stars: {repository.stargazersCount}</Text>
-			<Text>Review: {repository.reviewCount}</Text>
-			<Text>Rating: {repository.ratingAverage}</Text>
+			<View style={styles.statisticContainer}>
+				<Statistic stat={repository.stargazersCount} description="Stars" />
+				<Statistic stat={repository.forksCount} description="Forks" />
+				<Statistic stat={repository.reviewCount} description="Reviews" />
+				<Statistic stat={repository.ratingAverage} description="Rating" />
+			</View>
 		</View>
 	);
 };
 
 export default RepositoryItem;
+
+/**
+ * @typedef {Object} Statistic
+ * @property {number} stat
+ * @property {string} description
+ */
+
+/**
+ *
+ * @param {Statistic} props
+ * @returns
+ */
+const Statistic = ({ stat, description }) => {
+	const styles = StyleSheet.create({
+		container: {
+			alignItems: 'center',
+		},
+	});
+
+	const parseStat = () => {
+		return stat >= 1000 ? Math.round((stat / 1000) * 10) / 10 + 'k' : stat;
+	};
+
+	return (
+		<View style={styles.container}>
+			<Text fontWeight="bold">{parseStat()}</Text>
+			<Text>{description}</Text>
+		</View>
+	);
+};
