@@ -29,7 +29,9 @@ const AppBar = () => {
 					</Text>
 				</Link>
 				<Link to="/signin">
-					<Text color="subheading">Signin</Text>
+					<Text color="subheading" fontSize="subheading" fontWeight="bold">
+						Signin
+					</Text>
 				</Link>
 			</ScrollView>
 		</View>
@@ -37,5 +39,3 @@ const AppBar = () => {
 };
 
 export default AppBar;
-
-// TODO: Style the link
