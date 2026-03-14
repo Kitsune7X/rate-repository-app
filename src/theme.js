@@ -10,6 +10,8 @@ const theme = {
 		primary: '#0366d6',
 		background: '#24292e',
 		lightGray: '#e1e4e8',
+		midGray: '#acacac',
+		error: '#d73a4a',
 	},
 	fontSizes: {
 		body: 14,

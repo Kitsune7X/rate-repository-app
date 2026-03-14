@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
 	colorPrimary: {
 		color: theme.colors.primary,
 	},
+	colorError: {
+		color: theme.colors.error,
+	},
 	fontSizeHeading: {
 		fontSize: theme.fontSizes.heading,
 	},
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
 // Define special type with JSDoc
 /**
  * @typedef {Object} TextComponentProps
- * @property {'textSecondary' | 'primary' | 'subheading'} [color]
+ * @property {'textSecondary' | 'primary' | 'subheading' | 'error'} [color]
  * @property {'heading' | 'subheading'} [fontSize]
  * @property {'bold'} [fontWeight]
  * @property {any} [style]
@@ -53,6 +56,7 @@ const Text = ({ color, fontSize, fontWeight, style, children, ...props }) => {
 		color === 'textSecondary' && styles.colorTextSecondary,
 		color === 'primary' && styles.colorPrimary,
 		color === 'subheading' && styles.colorSubHeading,
+		color === 'error' && styles.colorError,
 		fontSize === 'heading' && styles.fontSizeHeading,
 		fontSize === 'subheading' && styles.fontSizeSubheading,
 		fontWeight === 'bold' && styles.fontWeightBold,
