@@ -1,5 +1,5 @@
 // @ts-check
-
+import { Platform } from 'react-native';
 // Using JSDoc type annotations since as const is not usable
 // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
 const theme = {
@@ -19,7 +19,11 @@ const theme = {
 		heading: 20,
 	},
 	fonts: {
-		main: 'System',
+		main: Platform.select({
+			android: 'Roboto',
+			ios: 'Arial',
+			default: 'System',
+		}),
 	},
 	fontWeights: /** @type {const} */ ({
 		normal: '400',
