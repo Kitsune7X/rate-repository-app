@@ -1,13 +1,12 @@
 // @ts-check
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
-import { FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useNavigate } from 'react-router-native';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import theme from '../theme';
 import { useDebounce } from 'use-debounce';
-import PropTypes from 'prop-types';
 import { Searchbar } from 'react-native-paper';
 
 const styles = StyleSheet.create({
