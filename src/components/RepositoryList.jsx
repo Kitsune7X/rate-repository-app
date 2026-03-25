@@ -7,6 +7,7 @@ import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import theme from '../theme';
 import { useDebounce } from 'use-debounce';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   separator: {
@@ -56,17 +57,32 @@ const OrderPicker = ({
 };
 
 // Search bar
-const SearchComponent = ({ searchKeyword, setSearchKeyword }) => {
-  return <TextInput value={searchKeyword} onChangeText={setSearchKeyword} />;
+const SearchComponent = ({ searchValue, setSearchValue }) => {
+  return <TextInput value={searchValue} onChangeText={setSearchValue} />;
 };
+
+// Experimenting with non destructuring props for cleaner component?
+const RepositoryListHeader = (props) => (
+  <View>
+    <OrderPicker
+      selectedOrder={props.selectedOrder}
+      setSelectedOrder={props.setSelectedOrder}
+      getSortedRepositories={props.getSortedRepositories}
+    />
+    <SearchComponent
+      searchValue={props.searchValue}
+      setSearchValue={props.setSearchValue}
+    />
+  </View>
+);
 
 export const RepositoryListContainer = ({
   repositories,
   selectedOrder = '',
   setSelectedOrder,
   getSortedRepositories,
-  searchKeyword,
-  setSearchKeyword,
+  searchValue = '',
+  setSearchValue,
 }) => {
   const navigate = useNavigate();
 
@@ -78,17 +94,13 @@ export const RepositoryListContainer = ({
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={
-        <View>
-          <OrderPicker
-            selectedOrder={selectedOrder}
-            setSelectedOrder={setSelectedOrder}
-            getSortedRepositories={getSortedRepositories}
-          />
-          <SearchComponent
-            searchKeyword={searchKeyword}
-            setSearchKeyword={setSearchKeyword}
-          />
-        </View>
+        <RepositoryListHeader
+          selectedOrder={selectedOrder}
+          setSelectedOrder={setSelectedOrder}
+          getSortedRepositories={getSortedRepositories}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
       }
       renderItem={({ item }) => (
         <Pressable
@@ -140,8 +152,8 @@ const RepositoryList = () => {
       selectedOrder={selectedOrder}
       setSelectedOrder={setSelectedOrder}
       getSortedRepositories={getSortedRepositories}
-      searchKeyword={searchValue}
-      setSearchKeyword={setSearchValue}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
     />
   );
 };
