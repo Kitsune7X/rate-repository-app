@@ -57,9 +57,11 @@ export const GET_CURRENT_USER = gql`
       reviews @include(if: $includeReviews) {
         edges {
           node {
+            id
             rating
             repository {
               fullName
+              id
             }
             createdAt
             text

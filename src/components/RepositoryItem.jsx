@@ -2,10 +2,11 @@
 import { Button, FlatList, Image, StyleSheet, View } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
-import { useParams } from 'react-router-native';
+import { useParams, useNavigate } from 'react-router-native';
 import useRepository from '../hooks/useRepository';
 import * as Linking from 'expo-linking';
 import { format } from 'date-fns';
+import useDeleteReview from '../hooks/useDeleteReview';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,23 +65,53 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 4,
   },
+  interactiveButtons: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 10,
+  },
 });
 
 // Single review item
 export const ReviewItem = ({ review }) => {
+  const navigate = useNavigate();
+  const [deleteReview] = useDeleteReview();
+
   return (
     <View style={styles.reviewItem}>
+      {/* Rating */}
       <View style={styles.reviewItemRating}>
         <Text fontSize="rating" color="primary" fontWeight="bold">
           {review.rating}
         </Text>
       </View>
+
+      {/* Description */}
       <View style={styles.reviewItemDescription}>
         <Text fontSize="subheading" fontWeight="bold">
           {review?.user?.username ?? review?.repository?.fullName}
         </Text>
         <Text color="textSecondary">{format(review.createdAt, 'd.M.y')}</Text>
         <Text>{review.text}</Text>
+
+        {/* Interactive Buttons */}
+        {review?.repository?.fullName && (
+          <View style={styles.interactiveButtons}>
+            <Button
+              title="View repository"
+              onPress={() => navigate(`/${review.repository.id}`)}
+            />
+            <Button
+              color={theme.colors.error}
+              title="Delete Review"
+              onPress={() =>
+                deleteReview({
+                  deleteReviewId: review.id,
+                })
+              }
+            />
+          </View>
+        )}
       </View>
     </View>
   );

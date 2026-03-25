@@ -6,4 +6,5 @@ export const useCurrentUser = ({ includeReviews = false } = {}) =>
     variables: {
       includeReviews,
     },
+    fetchPolicy: 'cache-and-network',
   });
