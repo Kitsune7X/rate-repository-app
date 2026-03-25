@@ -6,8 +6,6 @@ import useSignOut from '../hooks/useSignOut';
 import theme from '../theme';
 import Text from './Text';
 import { useCurrentUser } from '../hooks/useCurrentUser';
-import { useQuery } from '@apollo/client';
-import { GET_CURRENT_USER } from '../graphql/queries';
 
 const styles = StyleSheet.create({
   container: {
