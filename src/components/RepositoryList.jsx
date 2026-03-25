@@ -83,6 +83,7 @@ export const RepositoryListContainer = ({
   getSortedRepositories,
   searchValue = '',
   setSearchValue,
+  onEndReach,
 }) => {
   const navigate = useNavigate();
 
@@ -102,6 +103,8 @@ export const RepositoryListContainer = ({
           setSearchValue={setSearchValue}
         />
       }
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
       renderItem={({ item }) => (
         <Pressable
           onPress={() => {
@@ -128,11 +131,18 @@ const RepositoryList = () => {
   const [searchKeyword] = useDebounce(searchValue, 500);
 
   // Pass the debounced value to the query
-  const { repositories, loading, getRepositories } = useRepositories({
-    searchKeyword,
-  });
+  const { repositories, loading, getRepositories, fetchMore } = useRepositories(
+    {
+      first: 8,
+      searchKeyword,
+    },
+  );
 
   if (loading) return null;
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   const getSortedRepositories = async (orderBy, orderDirection) => {
     await getRepositories({
@@ -154,6 +164,7 @@ const RepositoryList = () => {
       getSortedRepositories={getSortedRepositories}
       searchValue={searchValue}
       setSearchValue={setSearchValue}
+      onEndReach={onEndReach}
     />
   );
 };

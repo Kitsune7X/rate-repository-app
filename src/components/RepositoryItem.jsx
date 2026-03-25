@@ -123,7 +123,14 @@ export const SingleRepository = () => {
 
   if (!repositoryId) return null;
 
-  const { repository, loading } = useRepository(repositoryId);
+  const { repository, loading, fetchMore } = useRepository({
+    repositoryId,
+    first: 8,
+  });
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   if (loading) return <div>Loading...</div>;
 
@@ -135,6 +142,8 @@ export const SingleRepository = () => {
       renderItem={({ item }) => <ReviewItem review={item} />}
       keyExtractor={({ id }) => id}
       ListHeaderComponent={() => <RepositoryItem repository={repository} />}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
