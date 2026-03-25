@@ -79,5 +79,3 @@ const AppBar = () => {
 };
 
 export default AppBar;
-
-// TODO: Add Picker to select sort order

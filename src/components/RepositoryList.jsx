@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-native';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import theme from '../theme';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
@@ -108,8 +109,13 @@ export const RepositoryListContainer = ({
 const RepositoryList = () => {
   const [selectedOrder, setSelectedOrder] = useState('');
   const [sortedRepositories, setSortedRepositories] = useState();
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
+  // Use debounce to avoid unnecessary requests while the user types the
+  // keyword fast
+  const [searchKeyword] = useDebounce(searchValue, 500);
+
+  // Pass the debounced value to the query
   const { repositories, loading, getRepositories } = useRepositories({
     searchKeyword,
   });
@@ -134,8 +140,8 @@ const RepositoryList = () => {
       selectedOrder={selectedOrder}
       setSelectedOrder={setSelectedOrder}
       getSortedRepositories={getSortedRepositories}
-      searchKeyword={searchKeyword}
-      setSearchKeyword={setSearchKeyword}
+      searchKeyword={searchValue}
+      setSearchKeyword={setSearchValue}
     />
   );
 };
