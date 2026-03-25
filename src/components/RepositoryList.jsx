@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ItemSeparator = () => <View style={styles.separator} />;
+export const ItemSeparator = () => <View style={styles.separator} />;
 
 // Picker
 const OrderPicker = ({
@@ -160,5 +160,4 @@ const RepositoryList = () => {
 
 export default RepositoryList;
 
-// TODO: Use Debounce
 // FIXME: Fix search bar losing focus

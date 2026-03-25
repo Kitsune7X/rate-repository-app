@@ -7,5 +7,3 @@ export const useCurrentUser = ({ includeReviews = false } = {}) =>
       includeReviews,
     },
   });
-
-// TODO: use $includeReviews to query conditionally

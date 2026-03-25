@@ -58,6 +58,9 @@ export const GET_CURRENT_USER = gql`
         edges {
           node {
             rating
+            repository {
+              fullName
+            }
             createdAt
             text
           }

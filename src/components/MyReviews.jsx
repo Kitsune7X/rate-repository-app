@@ -1,8 +1,26 @@
 import Text from './Text';
-import { GET_CURRENT_USER } from '../graphql/queries';
+import RepositoryItem, { ReviewItem } from './RepositoryItem';
+import { useCurrentUser } from '../hooks/useCurrentUser';
+import { FlatList } from 'react-native';
+import { ItemSeparator } from './RepositoryList';
 
 const MyReviews = () => {
-  return <Text>Hello from MyReviews</Text>;
+  const { data, loading } = useCurrentUser({ includeReviews: true });
+  console.log(data);
+
+  if (loading) return <Text>Loading...</Text>;
+
+  const reviews = data?.me?.reviews?.edges.map((r) => r.node);
+
+  console.log(reviews);
+
+  return (
+    <FlatList
+      data={reviews}
+      renderItem={({ item }) => <ReviewItem review={item} />}
+      ItemSeparatorComponent={ItemSeparator}
+    />
+  );
 };
 
 export default MyReviews;
