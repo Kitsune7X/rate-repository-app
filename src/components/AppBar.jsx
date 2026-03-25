@@ -1,12 +1,11 @@
 // @ts-check
-import { useQuery } from '@apollo/client';
 import Constants from 'expo-constants';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Link } from 'react-router-native';
-import { GET_CURRENT_USER } from '../graphql/queries';
 import useSignOut from '../hooks/useSignOut';
 import theme from '../theme';
 import Text from './Text';
+import { useCurrentUser } from '../hooks/useCurrentUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
 
 // App Bar component
 const AppBar = () => {
-  const currentUser = useQuery(GET_CURRENT_USER);
+  const currentUser = useCurrentUser();
 
   const signOut = useSignOut();
 
@@ -47,12 +46,21 @@ const AppBar = () => {
         {/* Sign in, Sign out Tab */}
         {currentUser.data?.me ? (
           <View style={styles.interactiveView}>
-            {/* Create a review only visible when user logged in*/}
+            {/* Create a review route */}
             <Link to="/create-a-review">
               <Text color="subheading" fontSize="subheading" fontWeight="bold">
                 Create a review
               </Text>
             </Link>
+
+            {/* My reviews route */}
+            <Link to="/my-reviews">
+              <Text color="subheading" fontSize="subheading" fontWeight="bold">
+                My reviews
+              </Text>
+            </Link>
+
+            {/* Sign out route */}
             <Pressable onPress={async () => await signOut()}>
               <Text color="subheading" fontSize="subheading" fontWeight="bold">
                 Sign out

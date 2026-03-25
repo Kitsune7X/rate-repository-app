@@ -8,6 +8,7 @@ import RepositoryItem from './RepositoryItem';
 import theme from '../theme';
 import { useDebounce } from 'use-debounce';
 import PropTypes from 'prop-types';
+import { Searchbar } from 'react-native-paper';
 
 const styles = StyleSheet.create({
   separator: {
@@ -58,7 +59,7 @@ const OrderPicker = ({
 
 // Search bar
 const SearchComponent = ({ searchValue, setSearchValue }) => {
-  return <TextInput value={searchValue} onChangeText={setSearchValue} />;
+  return <Searchbar value={searchValue} onChangeText={setSearchValue} />;
 };
 
 // Experimenting with non destructuring props for cleaner component?
